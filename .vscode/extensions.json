@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "Dart-Code.flutter",
+    "nrwl.angular-console",
+    "esbenp.prettier-vscode"
+  ]
+}

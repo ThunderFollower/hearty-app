@@ -1,0 +1,233 @@
+{
+  "name": "stethophone",
+  "projectType": "application",
+  "sourceRoot": "apps/stethophone",
+  "tags": [],
+  "targets": {
+    "analyze": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter analyze --no-fatal-infos",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "apply-fix": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm dart fix --apply",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "build-ios": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter build ios",
+        "cwd": "apps/stethophone"
+      },
+      "outputs": ["{workspaceRoot}/apps/stethophone/build"]
+    },
+    "build-ios-e2e": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter build ios --simulator --debug --flavor e2e --target=lib/main_e2e.dart --dart-define-from-file=env/common.json --dart-define-from-file=env/test.json",
+        "cwd": "apps/stethophone"
+      },
+      "outputs": ["{workspaceRoot}/apps/stethophone/build"]
+    },
+    "build-ipa": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter build ipa",
+        "cwd": "apps/stethophone"
+      },
+      "outputs": ["{workspaceRoot}/apps/stethophone/build"]
+    },
+    "ci": {
+      "dependsOn": ["pod-ci"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter pub run build_runner build -d",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "git clean -X -f",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "coverage": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter test --coverage",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "doctor": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter doctor",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "format": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm dart format lib test --fix",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "gen": {
+      "dependsOn": ["get"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter pub run build_runner build",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "gen-delete-conflicting-outputs": {
+      "dependsOn": ["get"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter pub run build_runner build -d",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "gen-i18n": {
+      "dependsOn": ["get"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter pub run easy_localization:generate -S assets/translations -f keys -o locale_keys.g.dart",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "gen-icon:main": {
+      "dependsOn": ["get"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter pub run flutter_launcher_icons:main",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "gen-icon:test": {
+      "dependsOn": ["get"],
+      "executor": "nx:run-commands",
+      "options": {
+        "args": "-f test_launcher_icons.yaml",
+        "command": "fvm flutter pub run flutter_launcher_icons",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "gen-icon:demo": {
+      "dependsOn": ["get"],
+      "executor": "nx:run-commands",
+      "options": {
+        "args": "-f demo_launcher_icons.yaml",
+        "command": "fvm flutter pub run flutter_launcher_icons",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "gen-icon:ua": {
+      "dependsOn": ["get"],
+      "executor": "nx:run-commands",
+      "options": {
+        "args": "-f ua_launcher_icons.yaml",
+        "command": "fvm flutter pub run flutter_launcher_icons",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "gen-splash": {
+      "dependsOn": ["get"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter pub run flutter_native_splash:create",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "get": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter pub get",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "get-clean": {
+      "dependsOn": ["clean"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter pub get",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "pod-ci": {
+      "dependsOn": ["get-clean"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pod install --repo-update",
+        "cwd": "apps/stethophone/ios"
+      }
+    },
+    "serve": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter run",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "serve-demo": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter run --flavor demo --target=lib/main_dev.dart --dart-define-from-file=env/common.json --dart-define-from-file=env/demo.json",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "serve-prod": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter run --target=lib/main_dev.dart --dart-define-from-file=env/common.json --dart-define-from-file=env/production.json",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "serve-staging": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter run --target=lib/main_dev.dart --dart-define-from-file=env/common.json --dart-define-from-file=env/staging.json",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "serve-test": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter run --flavor test --target=lib/main_dev.dart --dart-define-from-file=env/common.json --dart-define-from-file=env/test.json",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "serve-ua": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter run --flavor ua --target=lib/main_dev.dart --dart-define-from-file=env/common.json --dart-define-from-file=env/ua.json",
+        "cwd": "apps/stethophone"
+      }
+    },
+    "test": {
+      "dependsOn": ["gen", "gen-i18n"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "fvm flutter test",
+        "cwd": "apps/stethophone"
+      }
+    }
+  }
+}

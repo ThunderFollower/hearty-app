@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "debug",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "${workspaceFolder}/apps/hearty",
+      "program": "lib/main_dev.dart",
+      "toolArgs": [
+        "--dart-define=ENABLE_MARKETPLACE_FEATURE=false",
+        "--dart-define=ENABLE_UPDATE_FEATURE=false",
+      ]
+    },
+    {
+      "name": "debug:test",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "${workspaceFolder}/hearty",
+      "program": "lib/main_dev.dart",
+      "toolArgs": [
+        "--flavor",
+        "test",
+        "--dart-define-from-file",
+        "env/common.json",
+        "--dart-define-from-file",
+        "env/test.json",
+      ]
+    },
+  ]
+}

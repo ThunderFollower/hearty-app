@@ -1,0 +1,41 @@
+# Node Modules (Though Prettier usually ignores this by default)
+**/node_modules/
+
+# Build Output or Generated Files
+**/dist/
+**/build/
+
+# Npm files
+package-lock.json
+
+# Husky hooks
+.husky/_
+
+# Editors
+*.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+
+# Miscellaneous
+*.log
+
+# Flutter/Dart dependencies and build outputs for stethophone app
+stethophone/dart_tool/
+stethophone/.fvm/flutter_sdk/
+stethophone/.symlinks
+stethophone/Pods/
+stethophone/Podfile.lock
+stethophone/.flutter-plugins
+stethophone/.flutter-plugins-dependencies
+stethophone/.packages
+stethophone/.pub-cache/
+stethophone/.pub/
+stethophone/coverage/
+stethophone/android/
+stethophone/ios/
+
+# General coverage and typings directories
+/coverage
+/typings
